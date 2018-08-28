@@ -46,7 +46,7 @@ $Subs | ForEach-Object -Process {
             $Unit = $_.FullName
             . $Unit
             if ($sub.Export -or $exportAll) {
-                Export-ModuleMember -Function $_.BaseName
+                Export-ModuleMember -Function $_.BaseName -Alias *
             }
         } catch {
             $e = "Could not import '$Unit' with exception: `n`n`n$($_.Exception)" -as $_.Exception.GetType()
