@@ -13,7 +13,7 @@ Creates a customized Log Message.
 
 ## SYNTAX
 
-``` powershell
+```
 Write-CustomLog [[-VerbosityThreshold] <Int32>] [-Message] <String> [[-TimeStampFormat] <String>] [-LogHeader]
  [[-LogFile] <String>] [<CommonParameters>]
 ```
