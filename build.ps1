@@ -1,3 +1,5 @@
+[Cmdletbinding()]
+Param ()
 function Resolve-Module {
     [Cmdletbinding()]
     param
