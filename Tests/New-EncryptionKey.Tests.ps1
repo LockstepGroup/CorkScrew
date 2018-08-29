@@ -20,7 +20,6 @@ InModuleScope $ENV:BHProjectName {
         }
         It "Array should only contain objects with Byte type" {
             $Key = New-EncryptionKey
-            $key = @('test')
             foreach ($k in $key) {
                 $k.GetType().Name | Should -Be 'Byte'
             }
