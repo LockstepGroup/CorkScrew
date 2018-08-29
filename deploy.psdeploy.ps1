@@ -38,6 +38,16 @@ if (
 }
 
 # Publish to AppVeyor if we're in AppVeyor
+# You can use this to test a build from AppVeyor before pushing to psgallery
+# https://psdeploy.readthedocs.io/en/latest/Example-AppVeyorModule-Deployment/
+# Register-PSRepository -Name AppVeyorCorkScrew -SourceLocation https://ci.appveyor.com/nuget/corkscrew-xk7ko20iyyw1
+# Install-Module -Name CorkScrew -Repository AppVeyorCorkScrew
+# Import-Module CorkScrew
+#
+# Make sure to remove it after any tests
+# Uninstall-Module CorkScrew
+
+
 if (
     $env:BHPSModulePath -and
     $env:BHBuildSystem -eq 'AppVeyor'
