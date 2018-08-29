@@ -1,6 +1,9 @@
 # CorkScrew
 Useful tools that I'm tired of writing over and over again.
 
+## Current Cmdlets
+* Write-CustomLog
+
 ## Planned Cmdlets
 * Get-Uptime
 * Get-NiniteInstaller
