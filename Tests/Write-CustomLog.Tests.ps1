@@ -5,7 +5,7 @@ Remove-Module $ENV:BHProjectName -ErrorAction SilentlyContinue
 Import-Module (Join-Path $ENV:BHProjectPath $ENV:BHProjectName) -Force
 
 
-InModuleScope 'CorkScrew' {
+InModuleScope $ENV:BHProjectName {
     $PSVersion = $PSVersionTable.PSVersion.Major
     $ProjectRoot = $ENV:BHProjectPath
 
