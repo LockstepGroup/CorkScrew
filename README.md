@@ -21,7 +21,6 @@ Useful tools that I'm tired of writing over and over again.
 * Get-ElevationStatus
 * Invoke-ElevatedProcess
 * New-EncryptedString
-* New-EncryptionString
 
 ## Contributing
 
