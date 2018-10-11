@@ -2,6 +2,172 @@
 <helpItems schema="maml" xmlns="http://msh">
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Get-Ninite</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>Ninite</command:noun>
+      <maml:description>
+        <maml:para>Downloads and executes a Ninite installer for the selected applications.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Get-NiniteInstaller queries the ninite.com website and provides a list of available applications. If valid application names are given, it then downloads and executes the installer for those applications.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-Ninite</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+          <maml:name>Apps</maml:name>
+          <maml:Description>
+            <maml:para>Comma separated list of applications to install</maml:para>
+          </maml:Description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">.net4.7.2</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">7zip</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">aimp</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">air</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">audacity</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">avast</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">avg</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">avira</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">blender</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">cccp</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">cdburnerxp</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">chrome</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">classicstart</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">cutepdf</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">discord</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">dropbox</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">eclipse</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">essentials</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">evernote</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">everything</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">faststone</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">filezilla</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">firefox</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">foobar</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">foxit</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">gimp</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">glary</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">gom</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">googlebackupandsync</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">googleearth</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">greenshot</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">handbrake</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">imgburn</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">infrarecorder</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">inkscape</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">irfanview</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">itunes</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">java8</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">jdk8</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">jdkx8</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">keepass2</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">klitecodecs</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">krita</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">launchy</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">libreoffice</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">malwarebytes</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">mediamonkey</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">mozy</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">musicbee</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">notepadplusplus</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">nvda</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">onedrive</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">openoffice</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">operaChromium</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">paint.net</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">pdfcreator</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">peazip</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">pidgin</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">putty</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">python</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">qbittorrent</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">realvnc</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">revo</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">sharex</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">shockwave</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">silverlight</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">skype</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">spotify</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">spybot2</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">steam</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">sugarsync</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">sumatrapdf</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">super</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">teamviewer13</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">teracopy</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">thunderbird</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">trillian</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">vlc</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">vscode</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">winamp</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">windirstat</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">winmerge</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">winrar</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">winscp</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">xnview</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <maml:name>Apps</maml:name>
+        <maml:Description>
+          <maml:para>Comma separated list of applications to install</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-Ninite -Apps firefox,7zip</dev:code>
+        <dev:remarks>
+          <maml:para>Downloads and installs firefox and 7zip.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>New-EncryptionKey</command:name>
       <command:verb>New</command:verb>
       <command:noun>EncryptionKey</command:noun>
@@ -81,6 +247,180 @@
         <dev:code>PS C:\&gt; New-EncryptionKey -Size 64</dev:code>
         <dev:remarks>
           <maml:para>Returns a 64 byte array.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>New-PsModule</command:name>
+      <command:verb>New</command:verb>
+      <command:noun>PsModule</command:noun>
+      <maml:description>
+        <maml:para>{{Fill in the Synopsis}}</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>{{Fill in the Description}}</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>New-PsModule</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+          <maml:name>Name</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill Name Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill Force Description}}</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill Path Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>SecureNuGetApiKey</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill SecureNuGetApiKey Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>SecureSlackApiKey</maml:name>
+          <maml:Description>
+            <maml:para>{{Fill SecureSlackApiKey Description}}</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Force</maml:name>
+        <maml:Description>
+          <maml:para>{{Fill Force Description}}</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <maml:name>Name</maml:name>
+        <maml:Description>
+          <maml:para>{{Fill Name Description}}</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Path</maml:name>
+        <maml:Description>
+          <maml:para>{{Fill Path Description}}</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>SecureNuGetApiKey</maml:name>
+        <maml:Description>
+          <maml:para>{{Fill SecureNuGetApiKey Description}}</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>SecureSlackApiKey</maml:name>
+        <maml:Description>
+          <maml:para>{{Fill SecureSlackApiKey Description}}</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:remarks>
+          <maml:para>{{ Add example description here }}</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
