@@ -1,7 +1,7 @@
 ---
 external help file: CorkScrew-help.xml
 Module Name: CorkScrew
-online version:
+online version: https://github.com/LockstepGroup/CorkScrew/blob/master/docs/New-EncryptedString.md
 schema: 2.0.0
 ---
 
