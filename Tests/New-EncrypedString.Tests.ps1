@@ -4,7 +4,19 @@ if (-not $ENV:BHProjectPath) {
 Remove-Module $ENV:BHProjectName -ErrorAction SilentlyContinue
 Import-Module (Join-Path $ENV:BHProjectPath $ENV:BHProjectName) -Force
 
-$TestKey = @'
+
+
+InModuleScope $ENV:BHProjectName {
+    $PSVersion = $PSVersionTable.PSVersion.Major
+    $ProjectRoot = $ENV:BHProjectPath
+
+    $Verbose = @{}
+    if ($ENV:BHBranchName -notlike "master" -or $env:BHCommitMessage -match "!verbose") {
+        $Verbose.add("Verbose", $True)
+    }
+
+    Describe "New-EncryptedString" {
+        $TestKey = @'
 [
 11,
 52,
@@ -40,17 +52,6 @@ $TestKey = @'
 29
 ]
 '@
-
-InModuleScope $ENV:BHProjectName {
-    $PSVersion = $PSVersionTable.PSVersion.Major
-    $ProjectRoot = $ENV:BHProjectPath
-
-    $Verbose = @{}
-    if ($ENV:BHBranchName -notlike "master" -or $env:BHCommitMessage -match "!verbose") {
-        $Verbose.add("Verbose", $True)
-    }
-
-    Describe "New-EncryptedString" {
         $TestKey = $TestKey | ConvertFrom-Json
         $TestString = 'teststring'
         It "Should return a correctly encrypted string" {
