@@ -15,9 +15,23 @@ InModuleScope $ENV:BHProjectName {
     }
 
     Describe "Get-Ninite" {
-        Mock Get-Item { return @{Value = "macos"} } -ParameterFilter { $Path -eq 'env:os' }
-        It "Should throw on non-windows systems" {
-            { Get-Ninite -Apps 7zip } | Should -Throw
+        Context "Non-Windows" {
+            Mock Get-Item { return @{Value = "macos"} } -ParameterFilter { $Path -eq 'env:os' }
+            It "Should throw on non-windows systems" {
+                { Get-Ninite -Apps 7zip } | Should -Throw
+            }
+        }
+        try {
+            $ThisOS = (Get-Item -Path env:os -ErrorAction Stop).Value     # did it this way so I could Mock Get-Item with Pester
+            if ($ThisOS -eq 'Windows_NT') {
+                Context "Windows" {
+                    It "Should download a file" {
+                        $ExePath = Join-Path -Path $env:TEMP -ChildPath ninite.exe
+                        Test-Path $ExePath | Should -BeTrue
+                    }
+                }
+            }
+        } catch {
         }
     }
 }

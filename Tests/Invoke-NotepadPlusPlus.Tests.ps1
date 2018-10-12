@@ -15,9 +15,11 @@ InModuleScope $ENV:BHProjectName {
     }
 
     Describe "Invoke-NotepadPlusPlus" {
-        Mock Get-Item { return @{Value = "macos"} } -ParameterFilter { $Path -eq 'env:os' }
-        It "Should throw on non-windows systems" {
-            { Invoke-NotepadPlusPlus } | Should -Throw
+        Context 'Non-Windows' {
+            Mock Get-Item { return @{Value = "macos"} } -ParameterFilter { $Path -eq 'env:os' }
+            It "Should throw on non-windows systems" {
+                { Invoke-NotepadPlusPlus } | Should -Throw
+            }
         }
     }
 }
