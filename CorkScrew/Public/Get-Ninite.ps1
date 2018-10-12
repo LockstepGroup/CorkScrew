@@ -5,7 +5,11 @@ function Get-Ninite {
     DynamicParam {
         $NiniteUrl = "https://ninite.com/"
         $NiniteExe = "ninite.exe"
-        $ThisOS = (Get-Item -Path env:os).Value     # did it this way so I could Mock Get-Item with Pester
+        try {
+            $ThisOS = (Get-Item -Path env:os -ErrorAction Stop).Value     # did it this way so I could Mock Get-Item with Pester
+        } catch {
+            $ThisOS = $null
+        }
         if ($ThisOS -eq 'Windows_NT') {
             $LocalSavePath = Join-Path $env:TEMP $NiniteExe
         }
@@ -36,10 +40,15 @@ function Get-Ninite {
     }
 
     Process {
-        $ThisOS = (Get-Item -Path env:os).Value     # did it this way so I could Mock Get-Item with Pester
+        try {
+            $ThisOS = (Get-Item -Path env:os -ErrorAction Stop).Value     # did it this way so I could Mock Get-Item with Pester
+        } catch {
+            Throw "Ninite is only support on Windows."
+        }
         if ($ThisOS -ne 'Windows_NT') {
             Throw "Ninite is only support on Windows."
         }
+
         if ($PSBoundParameters.Apps.Count -gt 0) {
             $DownloadUrl = $NiniteUrl + ( $PSBoundParameters.Apps -join '-' ) + "/" + $NiniteExe
             $DownloadUrl

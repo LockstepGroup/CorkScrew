@@ -1,0 +1,70 @@
+function Get-OSVersion ($m="localhost") { (gwmi "win32_operatingsystem" -ComputerName $m).caption }
+
+
+
+
+function Get-UserSid {
+    param (
+        [string]$Username
+    )
+
+    try {
+        (((New-Object System.Security.Principal.NTAccount $Username).Translate([System.Security.Principal.SecurityIdentifier]))).value
+    } catch {
+        $false
+    }
+}
+
+function Get-UsernameFromSid {
+    param (
+        [string]$SID
+    )
+
+    try {
+        ((New-Object System.Security.Principal.SecurityIdentifier($SID)).Translate( [System.Security.Principal.NTAccount])).Value
+    } catch {
+        $false
+    }
+}
+
+
+function Translate-UserSid {
+    param (
+        [string]$Username
+    )
+
+    Get-UsernameFromSid (Get-UserSid $Username)
+}
+
+function Get-RemoteAdminsGroupName {
+    param (
+        [string]$Computername
+    )
+
+    try {
+        (Get-WmiObject -Class Win32_Group -computername $Computername -Filter "SID='S-1-5-32-544' AND LocalAccount='True'" -EA "Stop").Name
+    } catch {
+        $false
+    }
+}
+
+function Get-LocalUsernameFromSid {
+    param (
+        [string]$Computername,
+        [string]$SID
+    )
+
+    try {
+        Get-WmiObject -Class Win32_UserAccount -computername $Computername -Filter "SID='$SID' AND LocalAccount='True'"
+    } catch {
+        $false
+    }
+}
+
+
+
+function npp ($Path) {
+    $npp = (Resolve-Path "C:\Program Files (x86)\Notepad++\notepad++.exe").Path
+    if ($Path -ne $null) { $Target = (Resolve-Path $Path).Path }
+    & $npp $Target
+}
