@@ -12,7 +12,7 @@
     RootModule        = 'CorkScrew.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '1.0.2'
+    ModuleVersion     = '1.0.3'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -30,7 +30,7 @@
     Copyright         = '(c) Lockstep Technology Group. All rights reserved.'
 
     # Description of the functionality provided by this module
-    Description       = 'Useful tools I''m tired over writing over and over.'
+    Description       = 'Useful tools that I''m tired of writing over and over again.'
 
     # Minimum version of the PowerShell engine required by this module
     PowerShellVersion = '3.0'

@@ -44,10 +44,10 @@ function Get-Ninite {
         try {
             $ThisOS = (Get-Item -Path env:os -ErrorAction Stop).Value     # did it this way so I could Mock Get-Item with Pester
         } catch {
-            Throw "Ninite is only support on Windows."
+            Throw "Ninite is only supported on Windows."
         }
         if ($ThisOS -ne 'Windows_NT') {
-            Throw "Ninite is only support on Windows."
+            Throw "Ninite is only supported on Windows."
         }
 
         if ($PSBoundParameters.Apps.Count -gt 0) {
