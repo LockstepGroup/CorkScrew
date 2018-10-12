@@ -1,4 +1,5 @@
 # CorkScrew
+[![Build status](https://ci.appveyor.com/api/projects/status/21wotglaxbh3wjyt?svg=true)](https://ci.appveyor.com/project/brianaddicks/corkscrew)
 
 Useful tools that I'm tired of writing over and over again.
 
@@ -15,10 +16,8 @@ Useful tools that I'm tired of writing over and over again.
 * Translate-UserSid
 * Get-LocalUsernameFromSid
 * Invoke-NotepadPlusPlus (alias: npp)
-* all of ipv4math
 * Get-ElevationStatus
 * Invoke-ElevatedProcess
-* New-EncryptedString
 
 ## Contributing
 
