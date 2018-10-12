@@ -28,7 +28,7 @@ InModuleScope $ENV:BHProjectName {
                     It "Should download a file" {
                         $ExePath = Join-Path -Path $env:TEMP -ChildPath ninite.exe
                         Write-Host $ExePath
-                        gci $env:temp
+                        Write-Host (gci $env:TEMP | Out-String)
                         Test-Path $ExePath | Should -BeTrue
                     }
                 }
