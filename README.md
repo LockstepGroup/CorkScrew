@@ -3,6 +3,12 @@
 
 Useful tools that I'm tired of writing over and over again.
 
+## Installation
+
+``` powershell
+Install-Module CorkScrew
+```
+
 ## Current Cmdlets
 
 * Get-Ninite
