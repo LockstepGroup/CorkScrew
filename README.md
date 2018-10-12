@@ -21,7 +21,6 @@ Useful tools that I'm tired of writing over and over again.
 * Get-UsernameFromSid
 * Translate-UserSid
 * Get-LocalUsernameFromSid
-* Invoke-NotepadPlusPlus (alias: npp)
 * Get-ElevationStatus
 * Invoke-ElevatedProcess
 
