@@ -16,7 +16,8 @@ function Get-Ninite {
         $Regex = [regex]'(?<=type="checkbox" class="js-homepage-app-checkbox" name="apps" value=")[^\"]+(?=")'
 
         try {
-            $DataSource = (New-Object System.Net.WebClient).DownloadString($NiniteUrl)
+            $WebClient = New-Object System.Net.WebClient
+            $DataSource = $WebClient.DownloadString($NiniteUrl)
         } catch {
             Write-Error "Unable to contact URL $NiniteUrl to pull application list."
             return $false
