@@ -5,6 +5,12 @@ Useful tools that I'm tired of writing over and over again.
 
 ## Current Cmdlets
 
+* Get-Ninite
+* Invoke-FuriousIp
+* Invoke-NotepadPlusPlus
+* New-EncryptedString
+* New-EncryptionKey
+* New-PsModule
 * Write-CustomLog
 
 ## Planned Cmdlets
