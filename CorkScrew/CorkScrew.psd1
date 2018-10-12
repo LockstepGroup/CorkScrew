@@ -12,7 +12,7 @@
     RootModule        = 'CorkScrew.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '1.0.0'
+    ModuleVersion     = '1.0.1'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -27,7 +27,7 @@
     CompanyName       = 'Lockstep Technology Group'
 
     # Copyright statement for this module
-    Copyright         = '(c) brian.addicks@lockstepgroup.com. All rights reserved.'
+    Copyright         = '(c) Lockstep Technology Group. All rights reserved.'
 
     # Description of the functionality provided by this module
     Description       = 'Useful tools I''m tired over writing over and over.'
@@ -51,7 +51,7 @@
     # ProcessorArchitecture = ''
 
     # Modules that must be imported into the global environment prior to importing this module
-    # RequiredModules = @()
+    RequiredModules   = @('IPv4Math')
 
     # Assemblies that must be loaded prior to importing this module
     # RequiredAssemblies = @()

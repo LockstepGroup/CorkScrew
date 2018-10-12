@@ -166,6 +166,10 @@
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/LockstepGroup/CorkScrew/blob/master/docs/Get-Ninite.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
         <maml:linkText>https://github.com/LockstepGroup/CorkScrew</maml:linkText>
         <maml:uri>https://github.com/LockstepGroup/CorkScrew</maml:uri>
       </maml:navigationLink>
@@ -176,6 +180,218 @@
       <maml:navigationLink>
         <maml:linkText>Ninite</maml:linkText>
         <maml:uri>https://ninite.com</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Invoke-FuriousIp</command:name>
+      <command:verb>Invoke</command:verb>
+      <command:noun>FuriousIp</command:noun>
+      <maml:description>
+        <maml:para>Pings things in a furiously fast fashion.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Uses .net ping and runspaces to ping a given network range very quickly. Optionally does a reverse lookup as well.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Invoke-FuriousIp</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+          <maml:name>Network</maml:name>
+          <maml:Description>
+            <maml:para>Network in any of the following formats: 192.168.10.10-192.168.11.10 192.168.10.20-255 192.168.*.2 192.168.10.0/24 192.168.10.0 255.255.255.0</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>SubnetMask</maml:name>
+          <maml:Description>
+            <maml:para>Subnet Mask for desired Network</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Limit</maml:name>
+          <maml:Description>
+            <maml:para>Number of concurrent threads to use</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>PingDelay</maml:name>
+          <maml:Description>
+            <maml:para>Time to wait for ping response in milliseconds</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>ReverseLookup</maml:name>
+          <maml:Description>
+            <maml:para>Specify if reverse lookup is desired</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Limit</maml:name>
+        <maml:Description>
+          <maml:para>Number of concurrent threads to use</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <maml:name>Network</maml:name>
+        <maml:Description>
+          <maml:para>Network in any of the following formats: 192.168.10.10-192.168.11.10 192.168.10.20-255 192.168.*.2 192.168.10.0/24 192.168.10.0 255.255.255.0</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>PingDelay</maml:name>
+        <maml:Description>
+          <maml:para>Time to wait for ping response in milliseconds</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>ReverseLookup</maml:name>
+        <maml:Description>
+          <maml:para>Specify if reverse lookup is desired</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>SubnetMask</maml:name>
+        <maml:Description>
+          <maml:para>Subnet Mask for desired Network</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.Net.IPAddress</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Invoke-FuriousIp 10.88.64.0/29
+
+Name       State Hostname
+----       ----- --------
+10.88.64.1  True
+10.88.64.2 False
+10.88.64.3 False
+10.88.64.4 False
+10.88.64.5 False
+10.88.64.6 False</dev:code>
+        <dev:remarks>
+          <maml:para>Pings all address in 10.88.64.0/29 network.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Invoke-FuriousIp 10.88.64.0/29 -ReverseLookup
+
+Name       State Hostname
+----       ----- --------
+10.88.64.1  True core.example.com
+10.88.64.2 False
+10.88.64.3 False
+10.88.64.4 False
+10.88.64.5 False
+10.88.64.6 False</dev:code>
+        <dev:remarks>
+          <maml:para>Pings all address in 10.88.64.0/29 network and performs a reverse lookup for each.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/LockstepGroup/CorkScrew/blob/master/docs/Invoke-FuriousIp.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>https://github.com/LockstepGroup/CorkScrew</maml:linkText>
+        <maml:uri>https://github.com/LockstepGroup/CorkScrew</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>https://www.powershellgallery.com/packages/CorkScrew</maml:linkText>
+        <maml:uri>https://www.powershellgallery.com/packages/CorkScrew</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -285,6 +501,10 @@ PS C:\&gt; $EncryptedString
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/LockstepGroup/CorkScrew/blob/master/docs/New-EncryptedString.md</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
         <maml:linkText>https://github.com/LockstepGroup/CorkScrew</maml:linkText>
         <maml:uri>https://github.com/LockstepGroup/CorkScrew</maml:uri>
       </maml:navigationLink>
@@ -379,6 +599,10 @@ PS C:\&gt; $EncryptedString
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/LockstepGroup/CorkScrew/blob/master/docs/New-EncryptionKey.md</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://github.com/LockstepGroup/CorkScrew</maml:linkText>
         <maml:uri>https://github.com/LockstepGroup/CorkScrew</maml:uri>
@@ -562,6 +786,10 @@ PS C:\&gt; $EncryptedString
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/LockstepGroup/CorkScrew/blob/master/docs/New-PsModule.md</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://github.com/LockstepGroup/CorkScrew</maml:linkText>
         <maml:uri>https://github.com/LockstepGroup/CorkScrew</maml:uri>
@@ -752,6 +980,10 @@ PS C:\&gt; $EncryptedString
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://github.com/LockstepGroup/CorkScrew/blob/master/docs/Write-CustomLog.md</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>https://github.com/LockstepGroup/CorkScrew</maml:linkText>
         <maml:uri>https://github.com/LockstepGroup/CorkScrew</maml:uri>

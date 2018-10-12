@@ -1,19 +1,11 @@
 Function Invoke-FuriousIp {
-    [CmdLetBinding(DefaultParameterSetName = "ipandmasklength")]
+    [CmdLetBinding()]
     Param(
-        [Parameter(Mandatory = $True, Position = 0, ValueFromPipeline = $True, ParameterSetName = 'ipandmask')]
-        [Net.IPAddress]$IPAddress,
+        [Parameter(Mandatory = $True, Position = 0)]
+        [string]$Network,
 
-        [Parameter(Mandatory = $True, Position = 1, ParameterSetName = 'ipandmask')]
-        [Alias("Mask")]
-        [Net.IPAddress]$SubnetMask,
-
-        [Parameter(Mandatory = $True, Position = 0, ParameterSetName = 'ipandmasklength')]
-        [ValidatePattern('\b((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\/(3[0-2]|2[0-9]|1[0-9]|[0-9])\b')]
-        [string]$IpAndMaskLength,
-
-        [Parameter(Mandatory = $True, Position = 0, ParameterSetName = 'iprange')]
-        [string]$IpRange,
+        [Parameter(Mandatory = $false, Position = 1)]
+        [string]$SubnetMask,
 
         [Parameter(Mandatory = $false)]
         [int]$Limit = 25,
@@ -26,21 +18,10 @@ Function Invoke-FuriousIp {
 
     )
     Begin {
-
-        Write-Verbose "ParameterSetName: $($PsCmdlet.ParameterSetName)"
-        switch ($PsCmdlet.ParameterSetName) {
-            'ipandmask' {
-                $NetworkRange = Get-NetworkRange -IPAddress $IPAddress -SubnetMask $SubnetMask
-                break
-            }
-            'ipandmasklength' {
-                $NetworkRange = Get-NetworkRange -IpAndMaskLength $IpAndMaskLength
-                break
-            }
-            'iprange' {
-                $NetworkRange = Get-NetworkRange -IpRange $IpRange
-                break
-            }
+        if ($SubnetMask) {
+            $NetworkRange = Resolve-GenericNetworkString -Network $Network -SubnetMask $SubnetMask
+        } else {
+            $NetworkRange = Resolve-GenericNetworkString -Network $Network
         }
 
         $ScriptBlock = {
