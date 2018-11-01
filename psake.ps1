@@ -35,7 +35,6 @@ Task Test -Depends Init {
 
     # Gather test results. Store them in a variable and file
     $CodeCoverageFiles = (Get-ChildItem "$ProjectRoot/$($ENV:BHProjectName)" -Recurse -File -Filter *.ps1).FullName
-
     $TestResults = Invoke-Pester -Path $ProjectRoot\Tests -PassThru -OutputFormat NUnitXml -OutputFile "$ProjectRoot\$TestFile" -CodeCoverage $CodeCoverageFiles9 -CodeCoverageOutputFile "$ProjectRoot\$CoverageFile"
 
     # In Appveyor?  Upload our tests! #Abstract this into a function?
