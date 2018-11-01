@@ -30,3 +30,6 @@ config.json*
 
 # Log Files
 *.log
+
+# Coverage Files
+CoverageResults*.xml
