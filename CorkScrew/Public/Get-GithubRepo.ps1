@@ -21,15 +21,15 @@ function Get-GithubRepo {
 
     Begin {
         try {
-            $ResolvedTargetPath = Resolve-Path -Path $TargetPath
+            $ResolvedTargetPath = Resolve-Path -Path $TargetPath -ErrorAction Stop
             $LocalFile = Join-Path -Path $ResolvedTargetPath -ChildPath "$Repository.zip"
             $ExtractDirectory = Join-Path -Path $ResolvedTargetPath -ChildPath $Repository
         } catch [System.Management.Automation.SessionStateException] {
             $PSCmdlet.ThrowTerminatingError(
                 [System.Management.Automation.ErrorRecord]::new(
-                    ([ItemNotFoundException]"TargetPath not found."),
+                    ([System.ArgumentException]"TargetPath not found."),
                     'TargetPathNotFound',
-                    [System.Management.Automation.ErrorCategory]::ObjectNotFound,
+                    [System.Management.Automation.ErrorCategory]::CloseError,
                     $TargetPath
                 )
             )
@@ -48,10 +48,15 @@ function Get-GithubRepo {
             $Headers = @{}
         }
 
+        # Enable TLS1.2 for Invoke-WebRequest
+        if ($global:PSVersionTable.PSEdition -ne 'Core') {
+            [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+        }
+
         $InitialUrl = 'https://api.github.com/repos/' + $Owner + "/" + $Repository
         try {
             $RepoInfo = Invoke-WebRequest -Uri $InitialUrl -Headers $Headers
-        } catch [System.Net.Http.HttpRequestException] {
+        } catch {
             $ErrorMessage = ($_.ErrorDetails.Message | ConvertFrom-Json).message
             switch -Regex ($ErrorMessage) {
                 'two-factor' {
@@ -66,9 +71,9 @@ function Get-GithubRepo {
                 default {
                     $PSCmdlet.ThrowTerminatingError(
                         [System.Management.Automation.ErrorRecord]::new(
-                            ([System.Net.Http.HttpRequestException]"URL not found. If this is a private repo, specify -Credential,"),
+                            ([System.ArgumentException]"URL not found. If this is a private repo, specify -Credential,"),
                             'RepoUrlNotFound',
-                            [System.Management.Automation.ErrorCategory]::InvalidOperation,
+                            [System.Management.Automation.ErrorCategory]::CloseError,
                             $InitialUrl
                         )
                     )
@@ -87,10 +92,10 @@ function Get-GithubRepo {
             } catch {
                 $PSCmdlet.ThrowTerminatingError(
                     [System.Management.Automation.ErrorRecord]::new(
-                        ([System.Net.Http.HttpRequestException]"URL not found. If this is a private repo, specify -Credential,"),
+                        ([System.ArgumentException]"URL not found. If this is a private repo, specify -Credential,"),
                         'RepoUrlNotFound',
-                        [System.Management.Automation.ErrorCategory]::InvalidOperation,
-                        $Url
+                        [System.Management.Automation.ErrorCategory]::CloseError,
+                        $InitialUrl
                     )
                 )
             }
@@ -104,13 +109,13 @@ function Get-GithubRepo {
         # Download zip file
         try {
             $DownloadFile = Invoke-WebRequest -Uri $DownloadUrl -OutFile $LocalFile -Headers $Headers
-        } catch [System.Net.Http.HttpRequestException] {
+        } catch {
             $PSCmdlet.ThrowTerminatingError(
                 [System.Management.Automation.ErrorRecord]::new(
-                    ([System.Net.Http.HttpRequestException]"URL not found. If this is a private repo, specify -Credential,"),
+                    ([System.ArgumentException]"URL not found. If this is a private repo, specify -Credential,"),
                     'RepoUrlNotFound',
-                    [System.Management.Automation.ErrorCategory]::InvalidOperation,
-                    $Url
+                    [System.Management.Automation.ErrorCategory]::CloseError,
+                    $InitialUrl
                 )
             )
         }
@@ -121,8 +126,11 @@ function Get-GithubRepo {
         # Move Files to root of targer directory
         $ExtraDirectory = $Repository + '-*'
         $ExtractedFolder = (Get-ChildItem -Path $ExtractDirectory -Filter $ExtraDirectory).FullName
-        $Move = Move-Item -Path "$ExtractedFolder/*" -Destination $ExtractDirectory
+        $Move = Move-Item -Path "$ExtractedFolder/*" -Destination $ExtractDirectory -Force -ErrorAction SilentlyContinue
         $RemoveExtraFolder = Remove-Item -Path $ExtractedFolder -Recurse -Force
+
+        # Delete zip file
+        Remove-Item -Path $LocalFile | Out-Null
 
     }
 }
