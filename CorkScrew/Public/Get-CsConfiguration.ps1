@@ -16,7 +16,15 @@ function Get-CsConfiguration {
     }
 
     PROCESS {
-        $ImportedContent = Get-Content -Path $Path -Raw | ConvertFrom-Json -AsHashtable
+        switch ($PSVersionTable.PSEdition) {
+            'Core' {
+                $ImportedContent = Get-Content -Path $Path -Raw | ConvertFrom-Json -AsHashtable
+            }
+            default {
+                $ImportedContent = Get-Content -Path $Path -Raw | ConvertFrom-Json
+            }
+        }
+
     }
 
     END {
