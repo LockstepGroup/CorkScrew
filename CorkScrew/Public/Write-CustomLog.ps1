@@ -1,27 +1,27 @@
 function Write-CustomLog {
     [CmdletBinding()]
     Param (
-        [parameter(Position=0,Mandatory=$false)]
-        [ValidateRange(0,5)]
-        [int]$VerbosityThreshold = 1,
+        [parameter(Position = 0, Mandatory = $false)]
+        [ValidateRange(0, 5)]
+        [int]$LogLevel = 1,
 
-        [Parameter(Position=1,Mandatory=$true)]
+        [Parameter(Position = 1, Mandatory = $true)]
         [String]$Message,
 
-        [Parameter(Position=2,Mandatory=$false)]
+        [Parameter(Position = 2, Mandatory = $false)]
+        [String]$LogFile = $global:LogFile,
+
+        [Parameter(Position = 3, Mandatory = $false)]
         [String]$TimeStampFormat = "HH:mm:ss.fffff",
 
-        [Parameter(Position=3,Mandatory=$false)]
-        [switch]$LogHeader,
-
-        [Parameter(Position=4,Mandatory=$false)]
-        [String]$LogFile = $global:LogFile
+        [Parameter(Mandatory = $false)]
+        [switch]$LogHeader
     )
     # timestamp formats:
     # "yyyy/MM/dd HH:mm:ss.fffff"
     # "HH:mm:ss.fffff"
 
-    if ($global:Verbosity -ge $VerbosityThreshold) {
+    if ($global:LogThreshold -ge $LogLevel) {
 
         # Create Custom LogMessage
         if ($LogHeader) {

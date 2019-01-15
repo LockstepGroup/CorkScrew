@@ -28,37 +28,37 @@ InModuleScope $ENV:BHProjectName {
             $Messages
         }
         It "Produce a log header on a new line" {
-            $global:Verbosity = 2
+            $global:LogThreshold = 2
             $Output = Write-CustomLog 1 "Log Header" -LogHeader -Verbose 4>&1
             $Output | Should -Be $LogHeader
         }
         It "Should log messages with verbosity 1 or lower" {
-            $global:Verbosity = 1
+            $global:LogThreshold = 1
             $Messages = GenLogMessages
             $Messages | Should -HaveCount 1
         }
         It "Should log messages with verbosity 2 or lower" {
-            $global:Verbosity = 2
+            $global:LogThreshold = 2
             $Messages = GenLogMessages
             $Messages | Should -HaveCount 2
         }
         It "Should log messages with verbosity 3 or lower" {
-            $global:Verbosity = 3
+            $global:LogThreshold = 3
             $Messages = GenLogMessages
             $Messages | Should -HaveCount 3
         }
         It "Should log messages with verbosity 4 or lower" {
-            $global:Verbosity = 4
+            $global:LogThreshold = 4
             $Messages = GenLogMessages
             $Messages | Should -HaveCount 4
         }
         It "Should log messages with verbosity 5 or lower" {
-            $global:Verbosity = 5
+            $global:LogThreshold = 5
             $Messages = GenLogMessages
             $Messages | Should -HaveCount 5
         }
         It "Should log no messages" {
-            $global:Verbosity = 0
+            $global:LogThreshold = 0
             $Messages = GenLogMessages
             $Messages | Should -HaveCount 0
         }
