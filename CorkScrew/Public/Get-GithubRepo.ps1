@@ -126,7 +126,13 @@ function Get-GithubRepo {
         # Move Files to root of targer directory
         $ExtraDirectory = $Repository + '-*'
         $ExtractedFolder = (Get-ChildItem -Path $ExtractDirectory -Filter $ExtraDirectory).FullName
-        $Move = Move-Item -Path "$ExtractedFolder/*" -Destination $ExtractDirectory -Force -ErrorAction SilentlyContinue
+        #$Move = Move-Item -Path "$ExtractedFolder/*" -Destination $ExtractDirectory -Force #-ErrorAction SilentlyContinue
+        $ExtractedFiles = Get-ChildItem -Path $ExtractedFolder -Recurse -File
+        foreach ($file in $ExtractedFiles) {
+            $thisSource = $file.FullName
+            $thisDestination = $file.FullName -replace $ExtractedFolder, $ExtractDirectory
+            $Move = Move-Item -Path $thisSource -Destination $thisDestination -Force
+        }
         $RemoveExtraFolder = Remove-Item -Path $ExtractedFolder -Recurse -Force
 
         # Delete zip file
