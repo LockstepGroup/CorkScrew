@@ -121,16 +121,18 @@ function Get-GithubRepo {
         }
 
         # Expand File
+        Write-Verbose "Extracting Zip: $LocalFile -> $ExtractDirectory"
         Expand-Archive -Path $LocalFile -DestinationPath $ExtractDirectory
+
 
         # Move Files to root of targer directory
         $ExtraDirectory = $Repository + '-*'
         $ExtractedFolder = (Get-ChildItem -Path $ExtractDirectory -Filter $ExtraDirectory).FullName
-        #$Move = Move-Item -Path "$ExtractedFolder/*" -Destination $ExtractDirectory -Force #-ErrorAction SilentlyContinue
+        Write-Verbose "ExtractedFolder: $ExtractedFolder"
         $ExtractedFiles = Get-ChildItem -Path $ExtractedFolder -Recurse -File
         foreach ($file in $ExtractedFiles) {
             $thisSource = $file.FullName
-            $thisDestination = $file.FullName -replace $ExtractedFolder, $ExtractDirectory
+            $thisDestination = ($file.FullName).Replace($ExtractedFolder, $ExtractDirectory)
             $Move = Move-Item -Path $thisSource -Destination $thisDestination -Force
         }
         $RemoveExtraFolder = Remove-Item -Path $ExtractedFolder -Recurse -Force
