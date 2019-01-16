@@ -1,7 +1,6 @@
 Function Invoke-FuriousIp {
     [CmdLetBinding()]
     Param(
-	[PoshBot.FromConfig()]
         [Parameter(Mandatory = $True, Position = 0)]
         [string]$Network,
 
@@ -16,7 +15,6 @@ Function Invoke-FuriousIp {
 
         [Parameter(Mandatory = $false)]
         [switch]$ReverseLookup
-
     )
     Begin {
         if ($SubnetMask) {
