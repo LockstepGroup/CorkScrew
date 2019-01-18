@@ -1,8 +1,8 @@
 function Invoke-ElevatedProcess {
     [CmdletBinding()]
     Param (
-        [Parameter(Mandatory = $True, Position = 0)]
-        [string]$ProcessName,
+        [Parameter(Mandatory = $false, Position = 0)]
+        [string]$ProcessName = (Get-Process -Id $pid).Name,
 
         [Parameter(Mandatory = $False, Position = 1)]
         [string]$Arguments,
