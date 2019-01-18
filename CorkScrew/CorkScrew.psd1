@@ -107,7 +107,14 @@
             # IconUri = ''
 
             # ReleaseNotes of this module
-            # ReleaseNotes = ''
+            ReleaseNotes = @'
+New Features
+* Test-UserElevation
+* Invoke-ElevatedProcess
+
+Fixes
+* Added missing newline to New-PsModule appveyor yaml output
+'@
 
         } # End of PSData hashtable
 
@@ -120,6 +127,7 @@
     # DefaultCommandPrefix = ''
 
 }
+
 
 
 

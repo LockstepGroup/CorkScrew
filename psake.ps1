@@ -10,7 +10,7 @@ Properties {
     $Timestamp = Get-date -uformat "%Y%m%d-%H%M%S"
     $PSVersion = $PSVersionTable.PSVersion.Major
     $TestFile = "TestResults_PS$PSVersion`_$TimeStamp.xml"
-    $CoverageFile = "CoverageResults_PS$PSVersion`_$TimeStamp.xml"
+    $CoverageFile = "cov.xml"
     $lines = '----------------------------------------------------------------------'
 
     $Verbose = @{}
