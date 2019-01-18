@@ -38,5 +38,6 @@ function Invoke-ElevatedProcess {
         Write-Error "Unable to start elevated process."
         return $false
     }
-
 }
+
+New-Alias -Name pwsudo -Value Invoke-ElevatedProcess

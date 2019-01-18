@@ -12,7 +12,7 @@
     RootModule        = 'CorkScrew.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '1.0.12'
+    ModuleVersion     = '1.0.13'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -108,12 +108,12 @@
 
             # ReleaseNotes of this module
             ReleaseNotes = @'
-New Features
-* Test-UserElevation
-* Invoke-ElevatedProcess
+New Cmdlets
+* Get-OsVersion
 
-Fixes
-* Added missing newline to New-PsModule appveyor yaml output
+Cmdlet Changes
+* Added default ProcessName to Invoke-ElevatedProcess of the host powershell process
+* Added alias pwsudo -> Invoke-ElevatedProcess
 '@
 
         } # End of PSData hashtable
@@ -127,6 +127,7 @@ Fixes
     # DefaultCommandPrefix = ''
 
 }
+
 
 
 
