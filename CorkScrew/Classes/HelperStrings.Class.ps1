@@ -272,6 +272,7 @@ Properties {
     $Timestamp = Get-date -uformat "%Y%m%d-%H%M%S"
     $PSVersion = $PSVersionTable.PSVersion.Major
     $TestFile = "TestResults_PS$PSVersion`_$TimeStamp.xml"
+    $CoverageFile = "cov.xml"
     $lines = '----------------------------------------------------------------------'
 
     $Verbose = @{}
@@ -295,7 +296,8 @@ Task Test -Depends Init {
     "`n`tSTATUS: Testing with PowerShell $PSVersion"
 
     # Gather test results. Store them in a variable and file
-    $TestResults = Invoke-Pester -Path $ProjectRoot\Tests -PassThru -OutputFormat NUnitXml -OutputFile "$ProjectRoot\$TestFile"
+    $CodeCoverageFiles = (Get-ChildItem "$ProjectRoot/$($ENV:BHProjectName)" -Recurse -File -Filter *.ps1).FullName
+    $TestResults = Invoke-Pester -Path $ProjectRoot\Tests -PassThru -OutputFormat NUnitXml -OutputFile "$ProjectRoot\$TestFile" -CodeCoverage $CodeCoverageFiles -CodeCoverageOutputFile "$ProjectRoot\$CoverageFile"
 
     # In Appveyor?  Upload our tests! #Abstract this into a function?
     If ($ENV:BHBuildSystem -eq 'AppVeyor') {
@@ -317,11 +319,15 @@ Task Test -Depends Init {
 Task Build -Depends Test {
     $lines
 
-    # Load the module, read the exported functions, update the psd1 FunctionsToExport
-    Set-ModuleFunctions
+    If ($ENV:BHBuildSystem -eq 'AppVeyor') {
+        # Load the module, read the exported functions, update the psd1 FunctionsToExport
+        Set-ModuleFunctions
+    }
 
-    # Bump the module version
-    Update-Metadata -Path $env:BHPSModuleManifest
+    If ($ENV:BHBuildSystem -ne 'AppVeyor') {
+        # Bump the module version
+        Update-Metadata -Path $env:BHPSModuleManifest
+    }
 }
 
 Task Deploy -Depends Build {
@@ -354,14 +360,14 @@ build: false
 # Kick off the CI/CD pipeline
 test_script:
     - ps: . ./build.ps1
+
+
 '@
 
     ############################################################
     # appveyor.yml PsGallery contents
     [string] AppVeyorPsGallery($ApiKey) {
         $ReturnString = @"
-# See http://www.appveyor.com/docs/appveyor-yml for many more options
-
 # Publish to PowerShell Gallery with this key
 environment:
     NuGetApiKey:

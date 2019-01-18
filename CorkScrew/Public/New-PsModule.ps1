@@ -11,10 +11,10 @@ function New-PsModule {
         [switch]$Force,
 
         [parameter(Mandatory = $false)]
-        [string]$SecureNuGetApiKey,
+        [string]$SecureNuGetApiKey = $global:SecureNuGetApiKey,
 
         [parameter(Mandatory = $false)]
-        [string]$SecureSlackApiKey
+        [string]$SecureSlackApiKey = $global:SecureSlackApiKey
     )
 
     BEGIN {
@@ -60,6 +60,12 @@ function New-PsModule {
         New-Item -Path (Join-Path -Path $ModulePath -ChildPath 'Private') -ItemType Directory | Out-Null
         New-Item -Path (Join-Path -Path $ModulePath -ChildPath 'Public') -ItemType Directory | Out-Null
         [HelperStrings]::Psm1File | Out-File (Join-Path -Path $ModulePath -ChildPath "$Name`.psm1")
+        if ($global:NewModuleManifestParams) {
+            $NewModuleManifestParams.Guid = New-Guid
+            $NewModuleManifestParams.RootModule = $Name
+            $NewModuleManifestParams.Path = (Join-Path -Path $ModulePath -ChildPath "$Name`.psd1")
+            New-ModuleManifest @NewModuleManifestParams
+        }
 
         # Create Tests directory
         New-Item -Path $TestsPath -ItemType Directory | Out-Null
