@@ -35,7 +35,7 @@ Task Test -Depends Init {
 
     # Gather test results. Store them in a variable and file
     $CodeCoverageFiles = (Get-ChildItem "$ProjectRoot/$($ENV:BHProjectName)" -Recurse -File -Filter *.ps1).FullName
-    $TestResults = Invoke-Pester -Path $ProjectRoot\Tests -PassThru -OutputFormat NUnitXml -OutputFile "$ProjectRoot\$TestFile" -CodeCoverage $CodeCoverageFiles9 -CodeCoverageOutputFile "$ProjectRoot\$CoverageFile"
+    $TestResults = Invoke-Pester -Path $ProjectRoot\Tests -PassThru -OutputFormat NUnitXml -OutputFile "$ProjectRoot\$TestFile" -CodeCoverage $CodeCoverageFiles -CodeCoverageOutputFile "$ProjectRoot\$CoverageFile"
 
     # In Appveyor?  Upload our tests! #Abstract this into a function?
     If ($ENV:BHBuildSystem -eq 'AppVeyor') {
@@ -68,7 +68,30 @@ Task Build -Depends Test {
     }
 }
 
-Task Deploy -Depends Build {
+Task Documentation -Depends Build {
+    $lines
+
+    $MkDocsYamlPath = Join-Path -Path $env:BHProjectPath -ChildPath 'mkdocs.yml'
+
+    If ($ENV:BHBuildSystem -ne 'AppVeyor') {
+        # Create mkdocs.yml file for readthedocs, would love to use powershell-yaml for this, but it was unreliable at best
+        $mkdocs = "site_name: $($env:BHProjectName) Docs`r`n"
+        $mkdocs += "theme: readthedocs`r`n"
+        $mkdocs += "pages:`r`n"
+        $mkdocs += "  - Home: index.md`r`n"
+        $mkdocs += "  - Cmdlets:`r`n"
+
+        Import-Module $env:BHPSModulePath
+        $Cmdlets = Get-Command -Module $env:BHProjectName
+        foreach ($cmdlet in $Cmdlets) {
+            $mkdocs += "    - $($cmdlet.Name): cmdlets/$($cmdlet.Name).md`r`n"
+        }
+
+        $mkdocs | Out-File -FilePath $MkDocsYamlPath -Force
+    }
+}
+
+Task Deploy -Depends Documentation {
     $lines
 
     $Params = @{

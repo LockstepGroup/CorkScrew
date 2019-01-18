@@ -14,8 +14,8 @@ Creates a customized Log Message.
 ## SYNTAX
 
 ```
-Write-CustomLog [[-VerbosityThreshold] <Int32>] [-Message] <String> [[-TimeStampFormat] <String>] [-LogHeader]
- [[-LogFile] <String>] [<CommonParameters>]
+Write-CustomLog [-LogLevel <Int32>] [-Message] <String> [[-LogFile] <String>] [[-TimeStampFormat] <String>]
+ [-LogHeader] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -102,8 +102,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -VerbosityThreshold
-Level to compare against $global:Verbosity to limit output as desired
+### -LogLevel
+{{Fill LogLevel Description}}
 
 ```yaml
 Type: Int32
@@ -111,7 +111,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 0
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
