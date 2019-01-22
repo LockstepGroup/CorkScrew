@@ -20,6 +20,7 @@ function Get-GithubRepo {
     )
 
     Begin {
+        $VerbosePrefix = "Get-GithubRepo:"
         try {
             $ResolvedTargetPath = Resolve-Path -Path $TargetPath -ErrorAction Stop
             $LocalFile = Join-Path -Path $ResolvedTargetPath -ChildPath "$Repository.zip"
@@ -48,21 +49,26 @@ function Get-GithubRepo {
             $Headers = @{}
         }
 
+        # Legacy PowerShell config
         # Enable TLS1.2 for Invoke-WebRequest
+        # Enable -UseBasicParsing for Invoke-WebRequest
         if ($global:PSVersionTable.PSEdition -ne 'Core') {
             [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+            $InvokeWebRequestParams = @{ 'UseBasicParsing' = $true }
+        } else {
+            $InvokeWebRequestParams = @{}
         }
 
         $InitialUrl = 'https://api.github.com/repos/' + $Owner + "/" + $Repository
         try {
-            $RepoInfo = Invoke-WebRequest -Uri $InitialUrl -Headers $Headers
+            $RepoInfo = Invoke-WebRequest -Uri $InitialUrl -Headers $Headers @InvokeWebRequestParams
         } catch {
             $ErrorMessage = ($_.ErrorDetails.Message | ConvertFrom-Json).message
             switch -Regex ($ErrorMessage) {
                 'two-factor' {
                     $MfaCode = Read-Host -Prompt "Two-Factor Code" -AsSecureString
                     $Headers.'X-GitHub-OTP' = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($MfaCode))
-                    $RepoInfo = (Invoke-WebRequest -Uri $InitialUrl -Headers $Headers).Content | ConvertFrom-Json
+                    $RepoInfo = (Invoke-WebRequest -Uri $InitialUrl -Headers $Headers).Content | ConvertFrom-Json @InvokeWebRequestParams
                     $global:RepoInfo = $RepoInfo
                     $Owner = $RepoInfo.full_name.Split('/')[0]
                     $Repository = $RepoInfo.full_name.Split('/')[1]
@@ -86,7 +92,7 @@ function Get-GithubRepo {
             $Url = $RepoInfo.releases_url -replace '{/id}', '/latest'
             try {
                 # Get latest release zipfile url
-                $LatestRelease = Invoke-WebRequest -Uri $Url -Headers $Headers
+                $LatestRelease = Invoke-WebRequest -Uri $Url -Headers $Headers @InvokeWebRequestParams
                 $Content = ConvertFrom-Json $LatestRelease.Content
                 $DownloadUrl = $Content.zipball_url
             } catch {
@@ -108,7 +114,7 @@ function Get-GithubRepo {
     Process {
         # Download zip file
         try {
-            $DownloadFile = Invoke-WebRequest -Uri $DownloadUrl -OutFile $LocalFile -Headers $Headers
+            $DownloadFile = Invoke-WebRequest -Uri $DownloadUrl -OutFile $LocalFile -Headers $Headers @InvokeWebRequestParams
         } catch {
             $PSCmdlet.ThrowTerminatingError(
                 [System.Management.Automation.ErrorRecord]::new(
@@ -129,6 +135,15 @@ function Get-GithubRepo {
         $ExtraDirectory = $Repository + '-*'
         $ExtractedFolder = (Get-ChildItem -Path $ExtractDirectory -Filter $ExtraDirectory).FullName
         Write-Verbose "ExtractedFolder: $ExtractedFolder"
+        $ExtractedDirectories = Get-ChildItem -Path $ExtractedFolder -Recurse -Directory
+        foreach ($directory in $ExtractedDirectories) {
+            $thisSource = $directory.FullName
+            Write-Verbose "$VerbosePrefix checking for directory: $thisSource"
+            $thisDestination = ($directory.FullName).Replace($ExtractedFolder, $ExtractDirectory)
+            if (!(Test-Path -Path $thisDestination)) {
+                New-Item -Path $thisDestination -ItemType Directory | Out-Null
+            }
+        }
         $ExtractedFiles = Get-ChildItem -Path $ExtractedFolder -Recurse -File
         foreach ($file in $ExtractedFiles) {
             $thisSource = $file.FullName
