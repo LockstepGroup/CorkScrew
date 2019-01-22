@@ -68,7 +68,7 @@ function Get-GithubRepo {
                 'two-factor' {
                     $MfaCode = Read-Host -Prompt "Two-Factor Code" -AsSecureString
                     $Headers.'X-GitHub-OTP' = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($MfaCode))
-                    $RepoInfo = (Invoke-WebRequest -Uri $InitialUrl -Headers $Headers).Content | ConvertFrom-Json @InvokeWebRequestParams
+                    $RepoInfo = (Invoke-WebRequest -Uri $InitialUrl -Headers $Headers @InvokeWebRequestParams).Content | ConvertFrom-Json
                     $global:RepoInfo = $RepoInfo
                     $Owner = $RepoInfo.full_name.Split('/')[0]
                     $Repository = $RepoInfo.full_name.Split('/')[1]
