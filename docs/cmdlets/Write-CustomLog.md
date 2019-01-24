@@ -8,18 +8,24 @@ schema: 2.0.0
 # Write-CustomLog
 
 ## SYNOPSIS
-
 Creates a customized Log Message.
 
 ## SYNTAX
 
+### nosyslog
 ```
-Write-CustomLog [-LogLevel <Int32>] [-Message] <String> [[-LogFile] <String>] [[-TimeStampFormat] <String>]
+Write-CustomLog [[-LogLevel] <Int32>] [-Message] <String> [[-LogFile] <String>] [[-TimeStampFormat] <String>]
  [-LogHeader] [<CommonParameters>]
 ```
 
-## DESCRIPTION
+### syslog
+```
+Write-CustomLog [[-LogLevel] <Int32>] [-Message] <String> [[-LogFile] <String>] [[-TimeStampFormat] <String>]
+ [-LogHeader] -SyslogServer <String> -SyslogPort <Int32> -SyslogApplication <String> [-IsError]
+ [<CommonParameters>]
+```
 
+## DESCRIPTION
 Creates a customized Log Message based on the desired Verbosity level. Verbosity is set with the global variable $global:Verbosity. If the Write-CustomLog Verbosity Threshold is lower than $global:Verbosity, then Message will be written to the Verbose Stream and optionally to LogFile. LogFile defaults to $global:Logfile. The intended usage is to set Verbosity and LogFile at the top of whatever script you use this in.
 
 ## EXAMPLES
@@ -42,6 +48,21 @@ If $Global:Verbosity is higher than 1, write formatted log header message to Ver
 
 ## PARAMETERS
 
+### -IsError
+{{Fill IsError Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: syslog
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -LogFile
 LogFile to write to.
 
@@ -51,8 +72,8 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 4
-Default value: $global:LogFile
+Position: 2
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -66,7 +87,22 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -LogLevel
+{{Fill LogLevel Description}}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -87,6 +123,51 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -SyslogApplication
+{{Fill SyslogApplication Description}}
+
+```yaml
+Type: String
+Parameter Sets: syslog
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SyslogPort
+{{Fill SyslogPort Description}}
+
+```yaml
+Type: Int32
+Parameter Sets: syslog
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SyslogServer
+{{Fill SyslogServer Description}}
+
+```yaml
+Type: String
+Parameter Sets: syslog
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -TimeStampFormat
 Custom TimeStamp format
 
@@ -96,36 +177,22 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
-Default value: "HH:mm:ss.fffff"
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -LogLevel
-{{Fill LogLevel Description}}
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
+For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### None
 ## OUTPUTS
 
-### None
+### System.Object
 ## NOTES
 
 ## RELATED LINKS
