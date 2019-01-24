@@ -14,6 +14,7 @@ pages:
     - New-EncryptedString: cmdlets/New-EncryptedString.md
     - New-EncryptionKey: cmdlets/New-EncryptionKey.md
     - New-PsModule: cmdlets/New-PsModule.md
+    - Send-SyslogMessage: cmdlets/Send-SyslogMessage.md
     - Test-UserElevation: cmdlets/Test-UserElevation.md
     - Write-CustomLog: cmdlets/Write-CustomLog.md
 
