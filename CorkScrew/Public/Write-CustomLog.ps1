@@ -28,7 +28,10 @@ function Write-CustomLog {
         [String]$SyslogApplication = $global:SyslogApplication,
 
         [Parameter(Mandatory = $false)]
-        [switch]$IsError
+        [switch]$IsError,
+
+        [Parameter(Mandatory = $false)]
+        [switch]$CsLogger
     )
     # timestamp formats:
     # "yyyy/MM/dd HH:mm:ss.fffff"
@@ -56,7 +59,7 @@ function Write-CustomLog {
         }
 
         # Syslog
-        if ($SyslogServer -and $SyslogPort -and $SyslogApplication) {
+        if (($SyslogServer -and $SyslogPort -and $SyslogApplication) -or ($CsLogger -and $SyslogApplication)) {
             # Translate Loglevel to Severity for Syslog
             if ($VerbosityThreshold -gt 2) {
                 $LogSeverity = 'Debug'
@@ -68,9 +71,11 @@ function Write-CustomLog {
                 $LogSeverity = 'Error'
             }
 
-            # Send Syslog to LogDNA
-            #Write-Verbose "$VerbosePrefix Sending syslog to $SyslogServer`:$SyslogPort with Severity $LogSeverity"
-            Send-SyslogMessage -Server $SyslogServer -UDPPort $SyslogPort -Severity $LogSeverity -Facility 'user' -Application $SyslogApplication -Message $SyslogMessage
+            if ($CsLogger) {
+                Send-CsLoggerMessage -Message $SyslogMessage -Facility "user" -Application $SyslogApplication -Severity $LogSeverity
+            } else {
+                Send-SyslogMessage -Server $SyslogServer -UDPPort $SyslogPort -Severity $LogSeverity -Facility 'user' -Application $SyslogApplication -Message $SyslogMessage
+            }
         }
     }
 }
