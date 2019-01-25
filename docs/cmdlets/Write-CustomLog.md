@@ -12,17 +12,10 @@ Creates a customized Log Message.
 
 ## SYNTAX
 
-### nosyslog
 ```
 Write-CustomLog [[-LogLevel] <Int32>] [-Message] <String> [[-LogFile] <String>] [[-TimeStampFormat] <String>]
- [-LogHeader] [<CommonParameters>]
-```
-
-### syslog
-```
-Write-CustomLog [[-LogLevel] <Int32>] [-Message] <String> [[-LogFile] <String>] [[-TimeStampFormat] <String>]
- [-LogHeader] -SyslogServer <String> -SyslogPort <Int32> -SyslogApplication <String> [-IsError]
- [<CommonParameters>]
+ [-LogHeader] [-SyslogServer <String>] [-SyslogPort <Int32>] [-SyslogApplication <String>] [-IsError]
+ [-CsLogger] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -48,12 +41,27 @@ If $Global:Verbosity is higher than 1, write formatted log header message to Ver
 
 ## PARAMETERS
 
+### -CsLogger
+{{Fill CsLogger Description}}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -IsError
 {{Fill IsError Description}}
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: syslog
+Parameter Sets: (All)
 Aliases:
 
 Required: False
@@ -128,10 +136,10 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String
-Parameter Sets: syslog
+Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -143,10 +151,10 @@ Accept wildcard characters: False
 
 ```yaml
 Type: Int32
-Parameter Sets: syslog
+Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -158,10 +166,10 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String
-Parameter Sets: syslog
+Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -184,8 +192,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
-For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
