@@ -31,6 +31,7 @@ function Send-LogDnaMessage {
     # Add ApiKey
     $Uri += '&apikey=' + $ApiKey
 
+    # Add Timestamp in Unix Time Milliseconds
     $Uri += '&now=' + ([DateTimeOffset]::UtcNow).ToUnixTimeMilliseconds()
 
     $Body = @{}
