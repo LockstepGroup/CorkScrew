@@ -1746,7 +1746,7 @@ PS C:\&gt; $EncryptedString
       <command:verb>Send</command:verb>
       <command:noun>LogDnaMessage</command:noun>
       <maml:description>
-        <maml:para>{{Fill in the Synopsis}}</maml:para>
+        <maml:para>Sends a log message to LogDna using the ingest Api.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
