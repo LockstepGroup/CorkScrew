@@ -87,8 +87,8 @@ function Send-SyslogMessage {
     $WhatIfMessage += "Hostname: $Hostname`r`n"
 
     if (($Timestamp -eq "") -or ($Timestamp -eq $null)) {
-        #$Timestamp = Get-Date -Format "MMM dd HH:mm:ss"
-        $Timestamp = ([DateTimeOffset]::UtcNow).ToUnixTimeMilliseconds()
+        $Timestamp = Get-Date -Format "MMM dd HH:mm:ss"
+        #$Timestamp = ([DateTimeOffset]::UtcNow).ToUnixTimeMilliseconds()
     }
     $WhatIfMessage += "Timestamp: $Timestamp`r`n"
 

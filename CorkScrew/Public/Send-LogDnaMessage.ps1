@@ -29,7 +29,7 @@ function Send-LogDnaMessage {
     }
 
     # Add ApiKey
-    $Uri += '&apikey=' + 'a36af6a77b124149564c7a4b9a9a84f0'
+    $Uri += '&apikey=' + $ApiKey
 
     $Uri += '&now=' + ([DateTimeOffset]::UtcNow).ToUnixTimeMilliseconds()
 
@@ -50,7 +50,7 @@ function Send-LogDnaMessage {
         ContentType = 'application/json'
     }
 
-    $IngestStatus = Invoke-WebRequest @webparams
+    $IngestStatus = Invoke-WebRequest @webparams -Verbose:$False
 
     $IngestStatus = $IngestStatus.Content | ConvertFrom-Json
     if ($IngestStatus.error) {
