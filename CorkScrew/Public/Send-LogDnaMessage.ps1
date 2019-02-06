@@ -51,6 +51,12 @@ function Send-LogDnaMessage {
         ContentType = 'application/json'
     }
 
+    # Enable -UseBasicParsing for Invoke-WebRequest
+    if ($global:PSVersionTable.PSEdition -ne 'Core') {
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+        $WebParams.UseBasicParsing = $true
+    }
+
     $IngestStatus = Invoke-WebRequest @webparams -Verbose:$False
 
     $IngestStatus = $IngestStatus.Content | ConvertFrom-Json
