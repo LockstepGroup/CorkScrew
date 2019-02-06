@@ -15,6 +15,7 @@ pages:
     - New-EncryptionKey: cmdlets/New-EncryptionKey.md
     - New-PsModule: cmdlets/New-PsModule.md
     - Send-CsLoggerMessage: cmdlets/Send-CsLoggerMessage.md
+    - Send-LogDnaMessage: cmdlets/Send-LogDnaMessage.md
     - Send-SyslogMessage: cmdlets/Send-SyslogMessage.md
     - Start-CsLogger: cmdlets/Start-CsLogger.md
     - Stop-CsLogger: cmdlets/Stop-CsLogger.md

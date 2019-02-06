@@ -14,8 +14,8 @@ Creates a customized Log Message.
 
 ```
 Write-CustomLog [[-LogLevel] <Int32>] [-Message] <String> [[-LogFile] <String>] [[-TimeStampFormat] <String>]
- [-LogHeader] [-SyslogServer <String>] [-SyslogPort <Int32>] [-SyslogApplication <String>] [-IsError]
- [-CsLogger] [<CommonParameters>]
+ [-LogHeader] [-SyslogServer <String>] [-SyslogPort <Int32>] [-SyslogApplication <String>]
+ [-LogDnaApiKey <String>] [-LogDnaEnvironment <String>] [-IsError] [-CsLogger] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -186,6 +186,36 @@ Aliases:
 
 Required: False
 Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -LogDnaApiKey
+{{Fill LogDnaApiKey Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -LogDnaEnvironment
+{{Fill LogDnaEnvironment Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

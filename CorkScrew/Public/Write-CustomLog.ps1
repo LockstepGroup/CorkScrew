@@ -28,6 +28,12 @@ function Write-CustomLog {
         [String]$SyslogApplication = $global:SyslogApplication,
 
         [Parameter(Mandatory = $false)]
+        [String]$LogDnaApiKey = $global:LogDnaApiKey,
+
+        [Parameter(Mandatory = $false)]
+        [String]$LogDnaEnvironment = $global:LogDnaEnvironment,
+
+        [Parameter(Mandatory = $false)]
         [switch]$IsError,
 
         [Parameter(Mandatory = $false)]
@@ -58,24 +64,32 @@ function Write-CustomLog {
             $LogMessage | Out-File $LogFile -Append
         }
 
+        # Translate Loglevel to Severity for Syslog
+        if ($LogLevel -gt 2) {
+            $LogSeverity = 'Debug'
+        } else {
+            $LogSeverity = 'Informational'
+        }
+
+        if ($IsError) {
+            $LogSeverity = 'Error'
+        }
+
         # Syslog
         if (($SyslogServer -and $SyslogPort -and $SyslogApplication) -or ($CsLogger -and $SyslogApplication)) {
-            # Translate Loglevel to Severity for Syslog
-            if ($VerbosityThreshold -gt 2) {
-                $LogSeverity = 'Debug'
-            } else {
-                $LogSeverity = 'Informational'
-            }
-
-            if ($IsError) {
-                $LogSeverity = 'Error'
-            }
-
             if ($CsLogger) {
                 Send-CsLoggerMessage -Message $SyslogMessage -Facility "user" -Application $SyslogApplication -Severity $LogSeverity
             } else {
                 Send-SyslogMessage -Server $SyslogServer -UDPPort $SyslogPort -Severity $LogSeverity -Facility 'user' -Application $SyslogApplication -Message $SyslogMessage
             }
+        }
+
+        # LogDna
+        if ($LogDnaApiKey -and $LogDnaEnvironment) {
+            if ($LogSeverity -eq 'Informational') {
+                $LogSeverity = 'INFO'
+            }
+            $SendLogDna = Send-LogDnaMessage -ApiKey $LogDnaApiKey -Message $SyslogMessage -Application $SyslogApplication -Environment $LogDnaEnvironment -Level $LogSeverity
         }
     }
 }
