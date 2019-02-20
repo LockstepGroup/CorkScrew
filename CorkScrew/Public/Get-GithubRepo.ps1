@@ -8,6 +8,9 @@ function Get-GithubRepo {
         [string]$Repository,
 
         [Parameter(Mandatory = $false)]
+        [string]$Branch = 'master',
+
+        [Parameter(Mandatory = $false)]
         [string]$TargetPath = (Get-Location).Path,
 
         [Parameter(ParameterSetName = "Credential", Mandatory = $false)]
@@ -69,7 +72,6 @@ function Get-GithubRepo {
                     $MfaCode = Read-Host -Prompt "Two-Factor Code" -AsSecureString
                     $Headers.'X-GitHub-OTP' = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($MfaCode))
                     $RepoInfo = (Invoke-WebRequest -Uri $InitialUrl -Headers $Headers @InvokeWebRequestParams).Content | ConvertFrom-Json
-                    $global:RepoInfo = $RepoInfo
                     $Owner = $RepoInfo.full_name.Split('/')[0]
                     $Repository = $RepoInfo.full_name.Split('/')[1]
                     continue
@@ -106,7 +108,7 @@ function Get-GithubRepo {
                 )
             }
         } else {
-            $DownloadUrl = "https://github.com/" + $Owner + "/" + $Repository + "/archive/master.zip"
+            $DownloadUrl = "https://github.com/" + $Owner + "/" + $Repository + "/archive/" + $Branch + ".zip"
         }
 
     }

@@ -88,7 +88,6 @@ function Send-SyslogMessage {
 
     if (($Timestamp -eq "") -or ($Timestamp -eq $null)) {
         $Timestamp = Get-Date -Format "MMM dd HH:mm:ss"
-        #$Timestamp = ([DateTimeOffset]::UtcNow).ToUnixTimeMilliseconds()
     }
     $WhatIfMessage += "Timestamp: $Timestamp`r`n"
 
