@@ -13,8 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Get-GithubRepo [-Owner] <String> [-Repository] <String> [-TargetPath <String>] [-Credential <PSCredential>]
- [-Release] [<CommonParameters>]
+Get-GithubRepo [-Owner] <String> [-Repository] <String> [-Branch <String>] [-TargetPath <String>]
+ [-Credential <PSCredential>] [-Release] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -93,6 +93,21 @@ Accept wildcard characters: False
 
 ### -TargetPath
 {{Fill TargetPath Description}}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Branch
+{{Fill Branch Description}}
 
 ```yaml
 Type: String
