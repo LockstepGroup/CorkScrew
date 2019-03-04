@@ -57,7 +57,11 @@ function Write-CustomLog {
         }
 
         # Write LogMessage to Verbose
-        Write-Verbose $LogMessage
+        if ($IsError) {
+            Write-Warning $LogMessage
+        } else {
+            Write-Verbose $LogMessage
+        }
 
         # Write LogMessage to LogFile if specified
         if ($LogFile) {
@@ -80,7 +84,6 @@ function Write-CustomLog {
             if ($CsLogger) {
                 Send-CsLoggerMessage -Message $SyslogMessage -Facility "user" -Application $SyslogApplication -Severity $LogSeverity
             } else {
-                Write-Verbose "$VerbosePrefix Sending to Syslog"
                 Send-SyslogMessage -Server $SyslogServer -UDPPort $SyslogPort -Severity $LogSeverity -Facility 'user' -Application $SyslogApplication -Message $SyslogMessage
             }
         }
