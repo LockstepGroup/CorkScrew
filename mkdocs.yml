@@ -7,6 +7,7 @@ pages:
     - Get-GithubRepo: cmdlets/Get-GithubRepo.md
     - Get-Ninite: cmdlets/Get-Ninite.md
     - Get-OsVersion: cmdlets/Get-OsVersion.md
+    - Group-ObjectByIpAddress: cmdlets/Group-ObjectByIpAddress.md
     - Invoke-ElevatedProcess: cmdlets/Invoke-ElevatedProcess.md
     - Invoke-FuriousIp: cmdlets/Invoke-FuriousIp.md
     - Invoke-NotepadPlusPlus: cmdlets/Invoke-NotepadPlusPlus.md
