@@ -11,7 +11,10 @@ function Group-ObjectByIpAddress {
     )
 
     BEGIN {
+        $VerbosePrefix = "Group-ObjectByIpAddress:"
         $ReturnObject = @()
+        Write-Verbose "$VerbosePrefix InputObject Count: $($InputObject.Count)"
+        Write-Verbose "$VerbosePrefix Property: $Property"
     }
 
     PROCESS {
@@ -20,6 +23,6 @@ function Group-ObjectByIpAddress {
     }
 
     END {
-        $InputObjectWithDecimalIp | Sort-Object -Property 'DecimalIpAddressAddedByCorkScrew' | Select-Object -Property * -ExcludeProperty DecimalIpAddressAddedByCorkScrew
+        $ReturnObject | Sort-Object -Property 'DecimalIpAddressAddedByCorkScrew' | Select-Object -Property * -ExcludeProperty DecimalIpAddressAddedByCorkScrew
     }
 }
