@@ -12,7 +12,7 @@
     RootModule        = 'CorkScrew.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '1.0.50'
+    ModuleVersion     = '1.0.52'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -127,6 +127,8 @@ Cmdlet Changes
     # DefaultCommandPrefix = ''
 
 }
+
+
 
 
 

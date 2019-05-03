@@ -4,6 +4,7 @@ pages:
   - Home: index.md
   - Cmdlets:
     - Get-CsConfiguration: cmdlets/Get-CsConfiguration.md
+    - Get-GeoCoding: cmdlets/Get-GeoCoding.md
     - Get-GithubRepo: cmdlets/Get-GithubRepo.md
     - Get-Ninite: cmdlets/Get-Ninite.md
     - Get-OsVersion: cmdlets/Get-OsVersion.md
