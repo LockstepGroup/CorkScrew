@@ -109,7 +109,8 @@
             # ReleaseNotes of this module
             ReleaseNotes = @'
 Cmdlet Changes
-* Added LogDna metadata support to Write-CustomLog and Send-LogDnaMessage
+* Added LogDna metadata support to Send-DnaLogMessage
+* Added LogDna metadata support to Write-CustomLog
 '@
 
         } # End of PSData hashtable
