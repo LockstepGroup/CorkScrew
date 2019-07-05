@@ -34,7 +34,7 @@ function Write-CustomLog {
         [String]$LogDnaEnvironment = $global:LogDnaEnvironment,
 
         [Parameter(Mandatory = $false)]
-        [String]$LogDnaMetaData = $global:LogDnaMetaData,
+        [String]$LogDnaMetaData = $global:LogDnaMetadata,
 
         [Parameter(Mandatory = $false)]
         [switch]$IsError,
@@ -96,7 +96,19 @@ function Write-CustomLog {
             if ($LogSeverity -eq 'Informational') {
                 $LogSeverity = 'INFO'
             }
-            $SendLogDna = Send-LogDnaMessage -ApiKey $LogDnaApiKey -Message $SyslogMessage -Application $SyslogApplication -Environment $LogDnaEnvironment -Level $LogSeverity
+
+            $LogDnaParameters = @{}
+            $LogDnaParameters.SyslogMessage = $LogDnaApiKey
+            $LogDnaParameters.Message = $SyslogMessage
+            $LogDnaParameters.Application = $SyslogApplication
+            $LogDnaParameters.Environment = $LogDnaEnvironment
+            $LogDnaParameters.Level = $LogSeverity
+
+            if ($LogDnaMetaData) {
+                $LogDnaParameters.Metadata = $LogDnaMetaData
+            }
+
+            $SendLogDna = Send-LogDnaMessage @LogDnaParameters
         }
     }
 }
