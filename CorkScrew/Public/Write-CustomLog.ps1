@@ -98,7 +98,7 @@ function Write-CustomLog {
             }
 
             $LogDnaParameters = @{}
-            $LogDnaParameters.SyslogMessage = $LogDnaApiKey
+            $LogDnaParameters.ApiKey = $LogDnaApiKey
             $LogDnaParameters.Message = $SyslogMessage
             $LogDnaParameters.Application = $SyslogApplication
             $LogDnaParameters.Environment = $LogDnaEnvironment
