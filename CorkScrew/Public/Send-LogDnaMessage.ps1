@@ -16,7 +16,10 @@ function Send-LogDnaMessage {
         [string] $Level,
 
         [Parameter(Mandatory = $true)]
-        [string] $Environment
+        [string] $Environment,
+
+        [Parameter(Mandatory = $true)]
+        [hashtable] $Metadata
     )
 
     $Uri = 'https://logs.logdna.com/logs/ingest?'
@@ -34,15 +37,21 @@ function Send-LogDnaMessage {
     # Add Timestamp in Unix Time Milliseconds
     $Uri += '&now=' + ([DateTimeOffset]::UtcNow).ToUnixTimeMilliseconds()
 
-    $Body = @{}
-    $Body.lines = @()
-    $Body.lines += @{
+    $Line = @{
         "line"  = $Message
         "app"   = $Application
         "level" = $Level
         "env"   = $Environment
     }
-    $Body = $Body | ConvertTo-Json
+
+    if ($Metadata) {
+        $Line.meta = $Metadata
+    }
+
+    $Body = @{}
+    $Body.lines = @()
+    $Body.lines += $Line
+    $Body = $Body | ConvertTo-Json -Depth 5
 
     $WebParams = @{
         Method      = 'POST'
@@ -58,7 +67,6 @@ function Send-LogDnaMessage {
     }
 
     $IngestStatus = Invoke-WebRequest @webparams -Verbose:$False
-
     $IngestStatus = $IngestStatus.Content | ConvertFrom-Json
     if ($IngestStatus.error) {
         Throw $IngestStatus.error

@@ -34,6 +34,9 @@ function Write-CustomLog {
         [String]$LogDnaEnvironment = $global:LogDnaEnvironment,
 
         [Parameter(Mandatory = $false)]
+        [String]$LogDnaMetaData = $global:LogDnaMetaData,
+
+        [Parameter(Mandatory = $false)]
         [switch]$IsError,
 
         [Parameter(Mandatory = $false)]
