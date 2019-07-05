@@ -108,12 +108,8 @@
 
             # ReleaseNotes of this module
             ReleaseNotes = @'
-New Cmdlets
-* Get-OsVersion
-
 Cmdlet Changes
-* Added default ProcessName to Invoke-ElevatedProcess of the host powershell process
-* Added alias pwsudo -> Invoke-ElevatedProcess
+* Added LogDna metadata support to Write-CustomLog and Send-LogDnaMessage
 '@
 
         } # End of PSData hashtable
@@ -127,6 +123,7 @@ Cmdlet Changes
     # DefaultCommandPrefix = ''
 
 }
+
 
 
 
