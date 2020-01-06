@@ -49,7 +49,7 @@ function Get-GithubRepo {
                 )
             }
         } else {
-            $Headers = @{}
+            $Headers = @{ }
         }
 
         # Legacy PowerShell config
@@ -59,7 +59,7 @@ function Get-GithubRepo {
             [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
             $InvokeWebRequestParams = @{ 'UseBasicParsing' = $true }
         } else {
-            $InvokeWebRequestParams = @{}
+            $InvokeWebRequestParams = @{ }
         }
 
         $InitialUrl = 'https://api.github.com/repos/' + $Owner + "/" + $Repository
@@ -69,12 +69,15 @@ function Get-GithubRepo {
             $ErrorMessage = ($_.ErrorDetails.Message | ConvertFrom-Json).message
             switch -Regex ($ErrorMessage) {
                 'two-factor' {
-                    $MfaCode = Read-Host -Prompt "Two-Factor Code" -AsSecureString
-                    $Headers.'X-GitHub-OTP' = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($MfaCode))
-                    $RepoInfo = (Invoke-WebRequest -Uri $InitialUrl -Headers $Headers @InvokeWebRequestParams).Content | ConvertFrom-Json
-                    $Owner = $RepoInfo.full_name.Split('/')[0]
-                    $Repository = $RepoInfo.full_name.Split('/')[1]
-                    continue
+                    $PSCmdlet.ThrowTerminatingError(
+                        [System.Management.Automation.ErrorRecord]::new(
+                            ([System.ArgumentException]"MFA is no longer supported by this API. Use a personal access token instead. https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line"),
+                            'RepoUrlNotFound',
+                            [System.Management.Automation.ErrorCategory]::CloseError,
+                            $InitialUrl
+                        )
+                    )
+
                 }
                 default {
                     $PSCmdlet.ThrowTerminatingError(
