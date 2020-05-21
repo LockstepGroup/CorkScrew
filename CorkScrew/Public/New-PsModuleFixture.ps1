@@ -101,9 +101,19 @@ function New-PsModuleFixture {
             $CmdletContent += "    }"
             $CmdletContent += ""
             $CmdletContent += "    PROCESS {"
+
+            if ($cmdlet -match 'New-') {
+                $CmdletContent += '        $ReturnObject = [' + $Noun + ']::new()'
+            }
+
             $CmdletContent += "    }"
             $CmdletContent += ""
             $CmdletContent += "    END {"
+
+            if ($cmdlet -match 'New-') {
+                $CmdletContent += '        $ReturnObject'
+            }
+
             $CmdletContent += "    }"
             $CmdletContent += "}"
 
