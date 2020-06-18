@@ -12,7 +12,7 @@
     RootModule        = 'CorkScrew.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '1.0.56'
+    ModuleVersion     = '1.0.57'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -109,8 +109,7 @@
             # ReleaseNotes of this module
             ReleaseNotes = @'
 Cmdlet Changes
-* Added LogDna metadata support to Send-DnaLogMessage
-* Added LogDna metadata support to Write-CustomLog
+* Added Get-DayOfThisWeek
 '@
 
         } # End of PSData hashtable
