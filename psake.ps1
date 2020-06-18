@@ -15,7 +15,7 @@ Properties {
 
     $Verbose = @{}
     if ($ENV:BHCommitMessage -match "!verbose") {
-        $Verbose = @{Verbose = $True}
+        $Verbose = @{Verbose = $True }
     }
 }
 
@@ -35,7 +35,7 @@ Task Test -Depends Init {
 
     # Gather test results. Store them in a variable and file
     $CodeCoverageFiles = (Get-ChildItem "$ProjectRoot/$($ENV:BHProjectName)" -Recurse -File -Filter *.ps1).FullName
-    $TestResults = Invoke-Pester -Path $ProjectRoot\Tests -PassThru -OutputFormat NUnitXml -OutputFile "$ProjectRoot\$TestFile" -CodeCoverage $CodeCoverageFiles -CodeCoverageOutputFile "$ProjectRoot\$CoverageFile"
+    $TestResults = Invoke-Pester -Path $ProjectRoot\Tests -PassThru -OutputFormat NUnitXml -OutputFile "$ProjectRoot\$TestFile" # -CodeCoverage $CodeCoverageFiles -CodeCoverageOutputFile "$ProjectRoot\$CoverageFile"
 
     # In Appveyor?  Upload our tests! #Abstract this into a function?
     If ($ENV:BHBuildSystem -eq 'AppVeyor') {
