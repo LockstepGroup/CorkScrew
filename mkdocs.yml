@@ -3,6 +3,7 @@ theme: readthedocs
 pages:
   - Home: index.md
   - Cmdlets:
+    - Copy-PsObjectWithNewProperty: cmdlets/Copy-PsObjectWithNewProperty.md
     - Get-CsConfiguration: cmdlets/Get-CsConfiguration.md
     - Get-DayOfThisWeek: cmdlets/Get-DayOfThisWeek.md
     - Get-GeoCoding: cmdlets/Get-GeoCoding.md

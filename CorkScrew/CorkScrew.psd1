@@ -12,7 +12,7 @@
     RootModule        = 'CorkScrew.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '1.0.58'
+    ModuleVersion     = '1.0.59'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -109,7 +109,7 @@
             # ReleaseNotes of this module
             ReleaseNotes = @'
 Cmdlet Changes
-* Added Get-DayOfThisWeek
+* Added Copy-PsObjectWithNewProperty
 '@
 
         } # End of PSData hashtable
@@ -123,6 +123,7 @@ Cmdlet Changes
     # DefaultCommandPrefix = ''
 
 }
+
 
 
 
