@@ -8,6 +8,7 @@ pages:
     - Get-DayOfThisWeek: cmdlets/Get-DayOfThisWeek.md
     - Get-GeoCoding: cmdlets/Get-GeoCoding.md
     - Get-GithubRepo: cmdlets/Get-GithubRepo.md
+    - Get-MacAddressVendor: cmdlets/Get-MacAddressVendor.md
     - Get-Ninite: cmdlets/Get-Ninite.md
     - Get-OsVersion: cmdlets/Get-OsVersion.md
     - Group-ObjectByIpAddress: cmdlets/Group-ObjectByIpAddress.md
