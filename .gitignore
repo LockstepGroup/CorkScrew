@@ -34,3 +34,4 @@ config.json*
 # Coverage Files
 CoverageResults*.xml
 cov.xml
+coverage.xml
