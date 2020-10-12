@@ -13,7 +13,7 @@ function Copy-PsObjectWithNewProperty {
     }
 
     PROCESS {
-        $Properties = ($PsObject | Get-Member -MemberType Property).Name
+        $Properties = ($PsObject | Get-Member -MemberType *Property).Name
         $AllProperties = $Properties + $NewProperty
 
         $ReturnObject = "" | Select-Object $AllProperties
