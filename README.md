@@ -104,6 +104,11 @@ Install-Module CorkScrew
         Update-MarkdownHelp "$ProjectRoot/docs"
         New-ExternalHelp -Path "$ProjectRoot/docs" -OutputPath"$ProjectRoot/CorkScrew/en-US/"
         ```
+
+1. Run the build script, this will run through pester tests locally and bump the version in the Module Manifest file.
+
+1. (Optional) Add any releases notes you want to the Module Manifest file ($ProjectRoot/CorkScrew/CorkScrew.psd1).
+
 1. Deploy the Module. We're using combination of PowerShell Modules (Psake, PSDeploy, Pester, BuildHelpers), AppVeyor, and Github to streamline testing and deployment of this module. Whenever a new commit is pushed to github, AppVeyor starts and automated "build" process. This isn't your typical build process like an application, as we don't need to compile anything. It does however, run through all tests, and depending on your options push the updated module to PSGallery or to a private NuGet repo for further testing. How you manage git is up to you, but here's a cli example.
 
     * Deploy to private NuGet Repo
