@@ -11,6 +11,7 @@ pages:
     - Get-MacAddressVendor: cmdlets/Get-MacAddressVendor.md
     - Get-Ninite: cmdlets/Get-Ninite.md
     - Get-OsVersion: cmdlets/Get-OsVersion.md
+    - Get-RegexMatch: cmdlets/Get-RegexMatch.md
     - Group-ObjectByIpAddress: cmdlets/Group-ObjectByIpAddress.md
     - Invoke-ElevatedProcess: cmdlets/Invoke-ElevatedProcess.md
     - Invoke-FuriousIp: cmdlets/Invoke-FuriousIp.md
