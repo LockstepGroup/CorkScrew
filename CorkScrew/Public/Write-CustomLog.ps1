@@ -108,7 +108,17 @@ function Write-CustomLog {
                 $LogDnaParameters.Metadata = $LogDnaMetaData
             }
 
-            $SendLogDna = Send-LogDnaMessage @LogDnaParameters
+            # try twice and then fail with a warning
+            # did this to prevent issues with logdna from interupting otherwise working scripts
+            try {
+                $SendLogDna = Send-LogDnaMessage @LogDnaParameters
+            } catch {
+                try {
+                    $SendLogDna = Send-LogDnaMessage @LogDnaParameters
+                } catch {
+                    Write-Warning "$VerbosePrefix unable to contact logdna, check firewall/network connectivity"
+                }
+            }
         }
     }
 }
