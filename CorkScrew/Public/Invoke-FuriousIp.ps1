@@ -1,10 +1,10 @@
 Function Invoke-FuriousIp {
     [CmdLetBinding()]
     Param(
-        [Parameter(Mandatory = $True, Position = 0)]
+        [Parameter(Mandatory = $True, Position = 0, ParameterSetName = "cidr")]
         [string]$Network,
 
-        [Parameter(Mandatory = $false, Position = 1)]
+        [Parameter(Mandatory = $false, Position = 1, ParameterSetName = "cidr")]
         [string]$SubnetMask,
 
         [Parameter(Mandatory = $false)]
@@ -14,11 +14,16 @@ Function Invoke-FuriousIp {
         [int]$PingDelay = 100,
 
         [Parameter(Mandatory = $false)]
-        [switch]$ReverseLookup
+        [switch]$ReverseLookup,
+
+        [Parameter(Mandatory = $true, ParameterSetName = "list")]
+        [string[]]$AddressList
     )
     Begin {
         if ($SubnetMask) {
             $NetworkRange = Resolve-GenericNetworkString -Network $Network -SubnetMask $SubnetMask
+        } elseif ($AddressList) {
+            $NetworkRange = $AddressList
         } else {
             $NetworkRange = Resolve-GenericNetworkString -Network $Network
         }
